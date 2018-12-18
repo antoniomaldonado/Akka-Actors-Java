@@ -7,6 +7,9 @@ import akka.pi.messages.Work;
 
 public class Worker extends UntypedActor {
 
+	// In this algorithm the master has split the job into chunks which are sent out to 
+	// each worker actor to be processed. When each worker has processed its chunk it sends
+	// a result back to the master which aggregates the total result.
 	public void onReceive(Object message) {
 		if (message instanceof Work) {
 			Work work = (Work) message;
