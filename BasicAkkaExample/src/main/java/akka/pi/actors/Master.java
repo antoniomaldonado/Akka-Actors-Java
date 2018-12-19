@@ -42,10 +42,8 @@ public class Master extends UntypedActor {
 			pi += result.getValue();
 			nrOfResults += 1;
 			if (nrOfResults == nrOfMessages) {
-				// Send the result to the listener
 				Duration duration = Duration.create(System.currentTimeMillis() - start, TimeUnit.MILLISECONDS);
 				listener.tell(new PiApproximation(pi, duration), getSelf());
-				// Stops this actor and all its supervised children
 				getContext().stop(getSelf());
 			}
 		} else {
