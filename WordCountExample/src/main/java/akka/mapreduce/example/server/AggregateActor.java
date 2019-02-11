@@ -17,6 +17,7 @@ public class AggregateActor extends UntypedActor {
 		else if (message instanceof String) {
 			if (((String) message).compareTo("DISPLAY_LIST") == 0)
 				System.out.println(finalReducedMap.toString());
+			getSender().tell("SHUTDOWN", getSelf());
 		}
 	}
 

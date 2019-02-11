@@ -14,7 +14,7 @@ public class Client {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		ActorSystem system = ActorSystem.create("ClientApp", ConfigFactory.load().getConfig("MapReduceClientApp"));
+		final ActorSystem system = ActorSystem.create("ClientApp", ConfigFactory.load().getConfig("MapReduceClientApp"));
 
 		final ActorRef fileReadActor = system.actorOf(new Props(FileReadActor.class));
 		final ActorRef remoteActor = system.actorFor("akka://MapReduceApp@localhost:2552/user/MapReduceActor");
@@ -23,15 +23,11 @@ public class Client {
 			private static final long serialVersionUID = 1L;
 
 			public UntypedActor create() {
-				return new ClientActor(remoteActor);
+				return new ClientActor(system, remoteActor);
 			}
 		}));
 
-		// TODO FIX
 		fileReadActor.tell("TheArtOfLoving.txt", actor);
-		remoteActor.tell("DISPLAY_LIST", actor);
-
-		system.shutdown();
 
 	}
 

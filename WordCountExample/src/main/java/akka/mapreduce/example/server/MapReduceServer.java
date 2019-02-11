@@ -24,7 +24,7 @@ public class MapReduceServer {
 	private ActorRef mapReduceActor;
 
 	public static void main(String[] args) {
-		new MapReduceServer(1, 1);
+		new MapReduceServer(5, 10);
 	}
 
 	@SuppressWarnings("serial")

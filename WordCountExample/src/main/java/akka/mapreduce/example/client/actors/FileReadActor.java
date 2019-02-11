@@ -15,7 +15,6 @@ public class FileReadActor extends UntypedActor {
 			try {
 				BufferedReader reader = getReader(fileName);
 				String line = null;
-				int count = 0;
 				while ((line = reader.readLine()) != null) {
 					getSender().tell(line.replaceAll("[^A-Za-z ]", ""), getSelf());
 				}
